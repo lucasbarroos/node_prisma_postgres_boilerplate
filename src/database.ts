@@ -2,7 +2,6 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-// A `main` function so that you can use async/await
 async function main() {
   const post = await prisma.post.create({
     data: {
@@ -20,10 +19,10 @@ async function main() {
   console.log(allUsers);
 }
 
-main()
-  .catch((e) => {
-    throw e;
-  })
-  .finally(async () => {
-    await prisma.$disconnect();
-  });
+// main()
+//   .catch((e) => {
+//     throw e;
+//   })
+//   .finally(async () => {
+//     await prisma.$disconnect();
+//   });
