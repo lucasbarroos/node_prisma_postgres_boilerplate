@@ -1,11 +1,11 @@
 import { Router } from 'express';
 
-const router = Router();
+const routes = Router();
 
-router.get('/users', (request, response) => {
+routes.get('/users', (request, response) => {
   return response.json({
     message: 'The users is working!',
   });
 });
 
-export default router;
+export default routes;

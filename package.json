@@ -14,6 +14,7 @@
     "typescript": "4.2.3"
   },
   "scripts": {
+    "start": "nodemon --watch 'src/' --exec 'ts-node src/index.ts' -e ts",
     "dev": "nodemon --watch 'src/' --exec 'ts-node src/index.ts' -e ts",
     "gen-schema": "prisma generate",
     "migrate": "npx prisma migrate dev migrating"
