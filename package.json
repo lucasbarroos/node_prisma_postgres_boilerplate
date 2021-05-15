@@ -1,0 +1,23 @@
+{
+  "name": "script",
+  "license": "MIT",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.23.0",
+    "@typescript-eslint/parser": "^4.23.0",
+    "eslint": "^7.26.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.23.1",
+    "prisma": "2.22.1",
+    "ts-node": "9.1.1",
+    "typescript": "4.2.3"
+  },
+  "scripts": {
+    "dev": "ts-node ./script.ts"
+  },
+  "dependencies": {
+    "@prisma/client": "^2.22.1"
+  },
+  "engines": {
+    "node": ">=10.0.0"
+  }
+}
