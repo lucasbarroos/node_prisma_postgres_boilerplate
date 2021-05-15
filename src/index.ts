@@ -1,5 +1,4 @@
 import express from 'express';
-import './database.ts';
 
 import * as dotenv from 'dotenv';
 

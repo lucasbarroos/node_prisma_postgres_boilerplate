@@ -1,9 +1,7 @@
+// Setting and starting the database
 import { PrismaClient } from '@prisma/client';
 
-const prisma = new PrismaClient();
-
-// Setting the database as a global instance
-const globalAny:any = global;
-globalAny.database = prisma;
+const prisma = new PrismaClient({ log: ['query', 'info'] });
+console.log('Called');
 
 export default prisma;
