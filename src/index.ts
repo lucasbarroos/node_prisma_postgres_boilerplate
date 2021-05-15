@@ -1,6 +1,9 @@
 import express from 'express';
+import './database.ts';
 
-require('dotenv').config();
+import * as dotenv from 'dotenv';
+
+dotenv.config();
 
 const app = express();
 
