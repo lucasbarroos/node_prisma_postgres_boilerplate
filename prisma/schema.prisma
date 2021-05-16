@@ -16,6 +16,7 @@ model Role {
 }
 
 model User {
+  active Boolean @default(true)
   id     Int     @id @default(autoincrement())
   email  String  @unique
   name   String?
