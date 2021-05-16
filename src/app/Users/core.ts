@@ -22,7 +22,7 @@ export const updateUser = async (id: number, data: IUser): Promise<IUser | null>
 export const getUserById = async (id: number): Promise<IUser | null> => {
   const user = await database.user.findUnique({
     where: { id: parseInt(`${id}`) },
-    include: { 
+    include: {
       role: true,
     },
   });
@@ -31,7 +31,7 @@ export const getUserById = async (id: number): Promise<IUser | null> => {
 
 export const getUsers = async (page?: number, limit?: number, listAll?: boolean, query?: any): Promise<IUser[]> => {
   const users = await database.user.findMany({
-    include: { 
+    include: {
       role: true,
     }
   });
