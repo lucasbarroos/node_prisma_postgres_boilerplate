@@ -1,7 +1,5 @@
-import { User } from '@prisma/client';
-
 export interface IUser {
-  active?: boolean;
+  active?: boolean
   id?: number
   email: string
   name: string | null

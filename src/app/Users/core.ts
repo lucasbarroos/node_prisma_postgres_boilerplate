@@ -22,11 +22,18 @@ export const updateUser = async (id: number, data: IUser): Promise<IUser | null>
 export const getUserById = async (id: number): Promise<IUser | null> => {
   const user = await database.user.findUnique({
     where: { id: parseInt(`${id}`) },
+    include: { 
+      role: true,
+    },
   });
   return user;
 };
 
 export const getUsers = async (page?: number, limit?: number, listAll?: boolean, query?: any): Promise<IUser[]> => {
-  const users = await database.user.findMany({});
+  const users = await database.user.findMany({
+    include: { 
+      role: true,
+    }
+  });
   return users;
 };
