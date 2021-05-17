@@ -1,5 +1,5 @@
 import database from '../../database';
-import { IUser } from './interface';
+import { IUser, IResponseType } from './interface';
 
 export const createUser = async (data: IUser): Promise<IUser | null> => {
   const newUser = await database.user.create({
@@ -29,11 +29,45 @@ export const getUserById = async (id: number): Promise<IUser | null> => {
   return user;
 };
 
-export const getUsers = async (page?: number, limit?: number, listAll?: boolean, query?: any): Promise<IUser[]> => {
+
+export const getUsers = async (page?: number, limit?: number, listAll?: boolean, query?: any): Promise<IResponseType | IUser[]> => {
+  const pageSelected = page || 1;
+  const limitSelected = limit || 10;
+  const numberToSkip = (pageSelected - 1) * limitSelected;
+
+  const listAllSanitized = listAll && JSON.parse(`${listAll}`) === true; // The listAll is comming as a string :(
+  
+  if (listAllSanitized) {
+    const users = await database.user.findMany({
+      skip: numberToSkip,
+      take: parseInt(`${limit}`) || 10,
+      include: {
+        role: true,
+      },
+      orderBy: {
+        name: 'asc',
+      },
+    });
+    
+    return users;
+  }
+
+  const usersTotal = await database.user.count({});
   const users = await database.user.findMany({
+    skip: numberToSkip,
+    take: parseInt(`${limit}`) || 10,
     include: {
       role: true,
-    }
+    },
+    orderBy: {
+      name: 'asc',
+    },
   });
-  return users;
+
+  return {
+    docs: users,
+    page: pageSelected,
+    limit: limitSelected,
+    total: usersTotal,
+  };
 };

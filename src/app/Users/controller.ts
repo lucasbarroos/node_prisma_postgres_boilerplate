@@ -9,7 +9,7 @@ export const store = async (request: { body: { active: boolean; name: string; em
   return response.send(user);
 };
 
-export const update = async (request: any, response: any) => {
+export const update = async (request: { params: { id: number }, body: { active: boolean; name: string; email: string; phone: string; roleId: number }; }, response: any) => {
   const { active, email, name, phone, roleId } = request.body;
   if (!name) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
@@ -18,7 +18,7 @@ export const update = async (request: any, response: any) => {
   return response.send(role);
 };
 
-export const index = async (request: any, response: any) => {
+export const index = async (request: { params: { id: number } }, response: any) => {
   const role = await getUserById(request.params.id);
   if (!role) {
     return response.status(404).send({ message: 'User not found' });

@@ -6,3 +6,9 @@ export interface IUser {
   phone: string | null
   roleId: number | null
 }
+export interface IResponseType {
+  total: number
+  docs: IUser[]
+  page: number
+  limit: number
+}
