@@ -37,10 +37,17 @@ export const getUsers = async (page?: number, limit?: number, listAll?: boolean,
 
   const listAllSanitized = listAll && JSON.parse(`${listAll}`) === true; // The listAll is comming as a string :(
   
+  console.log(query);
+  
   if (listAllSanitized) {
     const users = await database.user.findMany({
       skip: numberToSkip,
       take: parseInt(`${limit}`) || 10,
+      where: {
+        name: {
+          contains: query,
+        },
+      },
       include: {
         role: true,
       },
@@ -52,10 +59,21 @@ export const getUsers = async (page?: number, limit?: number, listAll?: boolean,
     return users;
   }
 
-  const usersTotal = await database.user.count({});
+  const usersTotal = await database.user.count({
+    where: {
+      name: {
+        contains: query,
+      },
+    },
+  });
   const users = await database.user.findMany({
     skip: numberToSkip,
     take: parseInt(`${limit}`) || 10,
+    where: {
+      name: {
+        contains: query,
+      },
+    },
     include: {
       role: true,
     },
