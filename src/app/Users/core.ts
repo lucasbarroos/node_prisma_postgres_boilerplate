@@ -37,8 +37,6 @@ export const getUsers = async (page?: number, limit?: number, listAll?: boolean,
 
   const listAllSanitized = listAll && JSON.parse(`${listAll}`) === true; // The listAll is comming as a string :(
   
-  console.log(query);
-  
   if (listAllSanitized) {
     const users = await database.user.findMany({
       skip: numberToSkip,
@@ -66,6 +64,7 @@ export const getUsers = async (page?: number, limit?: number, listAll?: boolean,
       },
     },
   });
+  
   const users = await database.user.findMany({
     skip: numberToSkip,
     take: parseInt(`${limit}`) || 10,
