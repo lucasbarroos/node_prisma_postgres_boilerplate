@@ -11,4 +11,5 @@ export interface IResponseType {
   docs: IUser[]
   page: number
   limit: number
+  pages: number
 }

@@ -69,5 +69,6 @@ export const getUsers = async (page?: number, limit?: number, listAll?: boolean,
     page: pageSelected,
     limit: limitSelected,
     total: usersTotal,
+    pages: Math.ceil(usersTotal/usersTotal),
   };
 };
