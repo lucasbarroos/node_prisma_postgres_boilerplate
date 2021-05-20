@@ -1,4 +1,4 @@
-import database from '../../database';
+import database from '../../../database';
 import { IUser, IResponseType } from './interface';
 
 export const createUser = async (data: IUser): Promise<IUser | null> => {

@@ -1,4 +1,4 @@
-import database from '../../database';
+import database from '../../../database';
 import { IRole } from './interface';
 
 export const createRole = async (data: IRole): Promise<IRole | null> => {
