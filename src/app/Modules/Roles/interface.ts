@@ -3,4 +3,5 @@ export interface IRole {
   active: boolean
   name: string
   description: string | null
+  permissions: string
 }
