@@ -18,7 +18,8 @@
     "dev": "nodemon --watch 'src/' --exec 'ts-node src/index.ts' -e ts",
     "docs": "npx prisma-docs-generator serve",
     "gen-schema": "prisma generate",
-    "migrate": "npx prisma migrate dev migrating"
+    "migrate": "npx prisma migrate dev migrating",
+    "seed": "npx prisma db seed --preview-feature"
   },
   "dependencies": {
     "@prisma/client": "^2.22.1",

@@ -3,7 +3,9 @@ export interface IRole {
   active: boolean
   name: string
   description: string | null
+  receive_admin_emails?: boolean
   permissions: any
+  deleted: boolean
 }
 export interface IResponseType {
   total: number
