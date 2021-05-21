@@ -25,3 +25,7 @@ model User {
   role   Role?   @relation(fields: [roleId], references: [id])
   roleId Int?
 }
+
+generator docs {
+  provider = "node node_modules/prisma-docs-generator"
+}

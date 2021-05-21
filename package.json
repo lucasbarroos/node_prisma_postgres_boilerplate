@@ -16,6 +16,7 @@
   "scripts": {
     "start": "nodemon --watch 'src/' --exec 'ts-node src/index.ts' -e ts",
     "dev": "nodemon --watch 'src/' --exec 'ts-node src/index.ts' -e ts",
+    "docs": "npx prisma-docs-generator serve",
     "gen-schema": "prisma generate",
     "migrate": "npx prisma migrate dev migrating"
   },
@@ -24,7 +25,8 @@
     "@types/express": "^4.17.11",
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "prisma-docs-generator": "^0.4.0"
   },
   "engines": {
     "node": ">=10.0.0"
