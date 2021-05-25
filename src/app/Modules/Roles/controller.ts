@@ -1,20 +1,21 @@
 import { createRole, getRoles, getRoleById, updateRole } from './core';
+import { IRole } from './interface';
 
-export const store = async (request: { body: { active:  boolean, name: string, description: string, permissions: any, deleted: boolean }; }, response: any) => {
-  const { active, name, description, permissions, deleted } = request.body;
+export const store = async (request: { body: IRole }, response: any) => {
+  const { active, name, description, permissions, deleted, allCustomersAccess, settingsAccess } = request.body;
   if (!name) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
   }
-  const user = await createRole({ active, name, description, permissions, deleted });
+  const user = await createRole({ active, name, description, permissions, deleted, allCustomersAccess, settingsAccess });
   return response.send(user);
 };
 
-export const update = async (request: { params: { id: number }, body: { active: boolean; name: string; description: string, permissions: any , deleted: boolean }; }, response: any) => {
-  const { active, name, description, permissions, deleted } = request.body;
+export const update = async (request: { params: { id: number }, body: IRole }, response: any) => {
+  const { active, name, description, permissions, deleted, allCustomersAccess, settingsAccess } = request.body;
   if (!name) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
   }
-  const role = await updateRole(request.params.id, { active, name, description, permissions, deleted });
+  const role = await updateRole(request.params.id, { active, name, description, permissions, deleted, allCustomersAccess, settingsAccess });
   return response.send(role);
 };
 

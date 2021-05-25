@@ -2,10 +2,12 @@ export interface IRole {
   id?: number
   active: boolean
   name: string
-  description: string | null
+  description?: string
   receive_admin_emails?: boolean
-  permissions: any
   deleted: boolean
+  permissions: any
+  settingsAccess: boolean
+  allCustomersAccess: boolean
 }
 export interface IResponseType {
   total: number
