@@ -31,9 +31,9 @@ model User {
   active   Boolean @default(true)
   id       Int     @id @default(autoincrement())
   email    String  @unique
-  name     String?
+  name     String
   phone    String?
-  password String?
+  password String
   role     Role?   @relation(fields: [roleId], references: [id])
   roleId   Int?
 }
