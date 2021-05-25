@@ -72,7 +72,7 @@ export const main = async () => {
     },
   });
   
-  await database.role.upsert({
+  const adminRole = await database.role.upsert({
     where: { name: 'ADMIN' },
     update: {},
     create: {
@@ -81,6 +81,66 @@ export const main = async () => {
       description: '',
       deleted: false,
       receive_admin_emails: true,
+      allCustomersAccess: true,
+      settingsAccess: true,
+      permissions: JSON.stringify({
+        customers: {
+          create: { type: Boolean, default: true },
+          update: { type: Boolean, default: true },
+          read: { type: Boolean, default: true },
+          delete: { type: Boolean, default: true },
+        },
+        users: {
+          create: { type: Boolean, default: true },
+          update: { type: Boolean, default: true },
+          read: { type: Boolean, default: true },
+          delete: { type: Boolean, default: true },
+        },
+        bakeries: {
+          create: { type: Boolean, default: true },
+          update: { type: Boolean, default: true },
+          read: { type: Boolean, default: true },
+          delete: { type: Boolean, default: true },
+        },
+        roles: {
+          create: { type: Boolean, default: true },
+          update: { type: Boolean, default: true },
+          read: { type: Boolean, default: true },
+          delete: { type: Boolean, default: true },
+        },
+        providers: {
+          create: { type: Boolean, default: true },
+          update: { type: Boolean, default: true },
+          read: { type: Boolean, default: true },
+          delete: { type: Boolean, default: true },
+        },
+        items: {
+          create: { type: Boolean, default: true },
+          update: { type: Boolean, default: true },
+          read: { type: Boolean, default: true },
+          delete: { type: Boolean, default: true },
+        },
+        paymentMachines: {
+          create: { type: Boolean, default: true },
+          update: { type: Boolean, default: true },
+          read: { type: Boolean, default: true },
+          delete: { type: Boolean, default: true },
+        },
+      }),
+    },
+  });
+  
+  await database.role.upsert({
+    where: { name: 'CLIENTE' },
+    update: {},
+    create: {
+      active: true,
+      name: 'CLIENTE',
+      description: '',
+      deleted: false,
+      receive_admin_emails: false,
+      allCustomersAccess: false,
+      settingsAccess: false,
       permissions: JSON.stringify({
         customers: {
           create: { type: Boolean, default: false },
@@ -97,7 +157,7 @@ export const main = async () => {
         bakeries: {
           create: { type: Boolean, default: false },
           update: { type: Boolean, default: false },
-          read: { type: Boolean, default: false },
+          read: { type: Boolean, default: true },
           delete: { type: Boolean, default: false },
         },
         roles: {
@@ -109,13 +169,13 @@ export const main = async () => {
         providers: {
           create: { type: Boolean, default: false },
           update: { type: Boolean, default: false },
-          read: { type: Boolean, default: false },
+          read: { type: Boolean, default: true },
           delete: { type: Boolean, default: false },
         },
         items: {
           create: { type: Boolean, default: false },
           update: { type: Boolean, default: false },
-          read: { type: Boolean, default: false },
+          read: { type: Boolean, default: true },
           delete: { type: Boolean, default: false },
         },
         paymentMachines: {
@@ -125,6 +185,19 @@ export const main = async () => {
           delete: { type: Boolean, default: false },
         },
       }),
+    },
+  });
+
+  await database.user.upsert({
+    where: { email: 'admin@admin.com.br' },
+    update: {},
+    create: {
+      active: true,
+      name: 'ADMIN',
+      email: 'admin@admin.com.br',
+      password: '123', // Encrypt the user password
+      phone: '(81) 91929-9129',
+      roleId: adminRole.id,
     },
   });
 };
@@ -137,8 +210,4 @@ main().then(() => {
   console.log('Finishing the database connection!');
   database.$disconnect();
 })
-
-// permissions: {
-//     allBakeries: { type: Boolean, default: false },
-//     settings: { type: Boolean, default: false },
 

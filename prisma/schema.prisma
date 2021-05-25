@@ -28,13 +28,14 @@ model Role {
 }
 
 model User {
-  active Boolean @default(true)
-  id     Int     @id @default(autoincrement())
-  email  String  @unique
-  name   String?
-  phone  String?
-  role   Role?   @relation(fields: [roleId], references: [id])
-  roleId Int?
+  active   Boolean @default(true)
+  id       Int     @id @default(autoincrement())
+  email    String  @unique
+  name     String?
+  phone    String?
+  password String?
+  role     Role?   @relation(fields: [roleId], references: [id])
+  roleId   Int?
 }
 
 generator docs {
