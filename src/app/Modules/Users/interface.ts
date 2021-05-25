@@ -2,9 +2,10 @@ export interface IUser {
   active?: boolean
   id?: number
   email: string
-  name: string | null
-  phone: string | null
-  roleId: number | null
+  name: string
+  password: string
+  phone?: string
+  roleId?: number
 }
 export interface IResponseType {
   total: number

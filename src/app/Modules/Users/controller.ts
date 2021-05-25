@@ -1,20 +1,21 @@
 import { createUser, getUsers, getUserById, updateUser } from './core';
+import { IUser } from './interface';
 
-export const store = async (request: { body: { active: boolean; name: string; email: string; phone: string; roleId: number }; }, response: any) => {
-  const { active, email, name, phone, roleId } = request.body;
+export const store = async (request: { body: IUser }, response: any) => {
+  const { active, email, name, phone, roleId, password } = request.body;
   if (!name) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
   }
-  const user = await createUser({ active, email, name, phone, roleId });
+  const user = await createUser({ active, email, name, phone, roleId, password });
   return response.send(user);
 };
 
-export const update = async (request: { params: { id: number }, body: { active: boolean; name: string; email: string; phone: string; roleId: number }; }, response: any) => {
-  const { active, email, name, phone, roleId } = request.body;
+export const update = async (request: { params: { id: number }, body: IUser }, response: any) => {
+  const { active, email, name, phone, roleId, password } = request.body;
   if (!name) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
   }
-  const role = await updateUser(request.params.id, { active, email, name, phone, roleId });
+  const role = await updateUser(request.params.id, { active, email, name, phone, roleId, password });
   return response.send(role);
 };
 
