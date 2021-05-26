@@ -1,7 +1,8 @@
 import database from '../../../database';
-import { IRole, IResponseType } from './interface';
+import { IRole, IRoleCreate, IResponseType } from './interface';
+import { Role } from '@prisma/client'
 
-export const createRole = async (data: IRole): Promise<IRole | null> => {
+export const createRole = async (data: IRoleCreate): Promise<IRole | null> => {
   const newRole = await database.role.create({
     data,
   });
@@ -25,7 +26,6 @@ export const getRoleById = async (id: number): Promise<IRole | null> => {
   });
   return role;
 };
-
 
 export const getRoles = async (page?: number, limit?: number, listAll?: boolean, query?: any): Promise<IResponseType | IRole[]> => {
   const pageSelected = page || 1;

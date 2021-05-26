@@ -15,16 +15,16 @@ model Module {
 }
 
 model Role {
-  id                   Int      @id @default(autoincrement())
-  active               Boolean  @default(true)
-  name                 String   @unique
-  description          String?
-  receive_admin_emails Boolean?
-  deleted              Boolean?
-  permissions          Json
-  settingsAccess       Boolean? @default(false)
-  allCustomersAccess   Boolean? @default(false)
-  users                User[]
+  id                 Int      @id @default(autoincrement())
+  active             Boolean  @default(true)
+  name               String   @unique
+  description        String?
+  receiveAdminEmails Boolean?
+  deleted            Boolean?
+  permissions        Json?
+  settingsAccess     Boolean? @default(false)
+  allCustomersAccess Boolean? @default(false)
+  users              User[]
 }
 
 model User {
