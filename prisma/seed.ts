@@ -1,4 +1,5 @@
 import database from '../src/database';
+import { cryptPassword } from '../src/app/Modules/Authentication/core';
 
 export const main = async () => {
   console.log('Seeding tables');
@@ -195,7 +196,7 @@ export const main = async () => {
       active: true,
       name: 'ADMIN',
       email: 'admin@admin.com.br',
-      password: '123', // Encrypt the user password
+      password: await cryptPassword('123'), // Encrypt the user password
       phone: '(81) 91929-9129',
       roleId: adminRole.id,
     },
