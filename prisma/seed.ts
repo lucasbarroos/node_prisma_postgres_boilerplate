@@ -80,7 +80,7 @@ export const main = async () => {
       name: 'ADMIN',
       description: '',
       deleted: false,
-      receive_admin_emails: true,
+      receiveAdminEmails: true,
       allCustomersAccess: true,
       settingsAccess: true,
       permissions: JSON.stringify({
@@ -138,7 +138,7 @@ export const main = async () => {
       name: 'CLIENTE',
       description: '',
       deleted: false,
-      receive_admin_emails: false,
+      receiveAdminEmails: false,
       allCustomersAccess: false,
       settingsAccess: false,
       permissions: JSON.stringify({
