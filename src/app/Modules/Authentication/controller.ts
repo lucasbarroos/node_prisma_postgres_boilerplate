@@ -1,7 +1,8 @@
 import { ILogin } from './interface';
 import { getUserByEmail } from '../Users/core';
+import { validateAccess } from './core';
 
-export const store = async (request: { body: ILogin }, response: any) => {
+export const login = async (request: { body: ILogin }, response: any) => {
   const { email, password } = request.body;
   if (!email || !password) {
       return response.status(400).send({
@@ -11,10 +12,14 @@ export const store = async (request: { body: ILogin }, response: any) => {
   }
 
   const user = await getUserByEmail(email);
-  console.log(user);
   if (!user) {
-    
+    return response.status(401).send({ message: 'User not registered' });
   }
 
-  return response.send({});
+  const validatedAccess = await validateAccess({ email, password });
+  if (!validatedAccess) {
+    return response.status(401).send({ message: 'Email or password incorrect' });
+  }
+
+  return response.send(validatedAccess);
 };

@@ -7,7 +7,7 @@ export const store = async (request: { body: IUser }, response: any) => {
   if (!name) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
   }
-  const user = await createUser({ active, email, name, phone, roleId, password: await cryptPassword(password) });
+  const user = await createUser({ active, email: email.toLocaleLowerCase(), name, phone, roleId, password: await cryptPassword(password) });
   return response.send(user);
 };
 
@@ -16,7 +16,7 @@ export const update = async (request: { params: { id: number }, body: IUser }, r
   if (!name) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
   }
-  const role = await updateUser(request.params.id, { active, email, name, phone, roleId });
+  const role = await updateUser(request.params.id, { active, email: email.toLocaleLowerCase(), name, phone, roleId });
   return response.send(role);
 };
 
