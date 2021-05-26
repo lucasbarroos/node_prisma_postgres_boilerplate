@@ -1,3 +1,12 @@
+export interface IUserUpdate {
+  active?: boolean
+  id?: number
+  email: string
+  name: string
+  phone: string | null
+  roleId: number | null
+}
+
 export interface IUser {
   active?: boolean
   id?: number

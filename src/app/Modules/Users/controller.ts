@@ -11,11 +11,11 @@ export const store = async (request: { body: IUser }, response: any) => {
 };
 
 export const update = async (request: { params: { id: number }, body: IUser }, response: any) => {
-  const { active, email, name, phone, roleId, password } = request.body;
+  const { active, email, name, phone, roleId } = request.body;
   if (!name) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
   }
-  const role = await updateUser(request.params.id, { active, email, name, phone, roleId, password });
+  const role = await updateUser(request.params.id, { active, email, name, phone, roleId });
   return response.send(role);
 };
 

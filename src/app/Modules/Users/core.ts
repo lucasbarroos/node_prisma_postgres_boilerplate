@@ -1,5 +1,5 @@
 import database from '../../../database';
-import { IUser, IResponseType } from './interface';
+import { IUser, IUserUpdate, IResponseType } from './interface';
 
 export const createUser = async (data: IUser): Promise<IUser | null> => {
   const newUser = await database.user.create({
@@ -8,7 +8,7 @@ export const createUser = async (data: IUser): Promise<IUser | null> => {
   return newUser;
 };
 
-export const updateUser = async (id: number, data: IUser): Promise<IUser | null> => {
+export const updateUser = async (id: number, data: IUserUpdate): Promise<IUser | null> => {
   const user = await database.user.update({
     where: {
       id: parseInt(`${id}`),
