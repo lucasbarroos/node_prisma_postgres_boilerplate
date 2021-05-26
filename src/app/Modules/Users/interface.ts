@@ -4,8 +4,8 @@ export interface IUser {
   email: string
   name: string
   password: string
-  phone?: string
-  roleId?: number
+  phone: string | null
+  roleId: number | null
 }
 export interface IResponseType {
   total: number

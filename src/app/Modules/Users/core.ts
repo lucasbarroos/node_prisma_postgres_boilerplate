@@ -1,14 +1,14 @@
 import database from '../../../database';
 import { IUser, IResponseType } from './interface';
 
-export const createUser = async (data: IUser): Promise<IUser> => {
+export const createUser = async (data: IUser): Promise<IUser | null> => {
   const newUser = await database.user.create({
     data,
   });
   return newUser;
 };
 
-export const updateUser = async (id: number, data: IUser): Promise<IUser> => {
+export const updateUser = async (id: number, data: IUser): Promise<IUser | null> => {
   const user = await database.user.update({
     where: {
       id: parseInt(`${id}`),
@@ -19,7 +19,7 @@ export const updateUser = async (id: number, data: IUser): Promise<IUser> => {
   return user;
 };
 
-export const getUserById = async (id: number): Promise<IUser> => {
+export const getUserById = async (id: number): Promise<IUser |  null> => {
   const user = await database.user.findUnique({
     where: { id: parseInt(`${id}`) },
     include: {
