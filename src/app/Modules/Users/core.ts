@@ -30,6 +30,13 @@ export const getUserById = async (id: number): Promise<IUser |  null> => {
 };
 
 
+export const getUserByEmail = async (email: string): Promise<IUser |  null> => {
+  const user = await database.user.findUnique({
+    where: { email: email.toLocaleLowerCase() },
+  });
+  return user;
+};
+
 export const getUsers = async (page?: number, limit?: number, listAll?: boolean, query?: any): Promise<IResponseType | IUser[]> => {
   const pageSelected = page || 1;
   const limitSelected = limit || 10;
