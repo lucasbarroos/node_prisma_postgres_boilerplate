@@ -1,7 +1,8 @@
 import database from '../../../database';
-import { IUser, IUserUpdate, IResponseType } from './interface';
+import { IUser, IUserCreate, IUserUpdate, IResponseType } from './interface';
+import { ICompany } from '../Companies/interface';
 
-export const createUser = async (data: IUser): Promise<IUser | null> => {
+export const createUser = async (data: IUserCreate, companies?: number[] | ICompany[]): Promise<IUser | null> => {
   const newUser = await database.user.create({
     data,
   });

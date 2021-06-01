@@ -1,13 +1,13 @@
 import { createUser, getUsers, getUserById, updateUser } from './core';
 import { cryptPassword } from '../Authentication/core';
-import { IUser } from './interface';
+import { IUserCreate, IUser } from './interface';
 
 export const store = async (request: { body: IUser }, response: any) => {
-  const { active, email, name, phone, roleId, password } = request.body;
+  const { active, email, name, phone, roleId, password, companies } = request.body;
   if (!name) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
   }
-  const user = await createUser({ active, email: email.toLocaleLowerCase(), name, phone, roleId, password: await cryptPassword(password) });
+  const user = await createUser({ active, email: email.toLocaleLowerCase(), name, phone, roleId, password: await cryptPassword(password) }, companies);
   return response.send(user);
 };
 
