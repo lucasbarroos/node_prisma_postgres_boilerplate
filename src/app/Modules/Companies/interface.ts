@@ -1,25 +1,27 @@
-import { JsonValue } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 export interface ICompanyCreate {
   active: boolean
+  id: number
   name: string
-  description: string | null
-  receiveAdminEmails: boolean | null
-  deleted: boolean | null
-  permissions: JsonValue | null
-  settingsAccess: boolean | null
-  allCustomersAccess: boolean | null
+  cpnj: string
+  document: string | null
+  email: string | null
+  phone: string | null
+  address: string | null
+  number: string | null
+  metadata: Prisma.JsonValue | null
 }
 export interface ICompany {
   id: number
   active: boolean
-  name: string
-  description: string | null
-  receiveAdminEmails: boolean | null
-  deleted: boolean | null
-  permissions: JsonValue | null
-  settingsAccess: boolean | null
-  allCustomersAccess: boolean | null
+  cpnj: string
+  document: string | null
+  email: string | null
+  phone: string | null
+  address: string | null
+  number: string | null
+  metadata: Prisma.JsonValue | null
 }
 export interface IResponseType {
   total: number

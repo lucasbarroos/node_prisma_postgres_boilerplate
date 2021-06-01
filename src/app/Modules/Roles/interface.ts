@@ -1,4 +1,4 @@
-import { JsonValue } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 
 export interface IRoleCreate {
   active: boolean
@@ -6,7 +6,7 @@ export interface IRoleCreate {
   description: string | null
   receiveAdminEmails: boolean | null
   deleted: boolean | null
-  permissions: JsonValue | null
+  permissions: Prisma.JsonValue | null
   settingsAccess: boolean | null
   allCustomersAccess: boolean | null
 }
@@ -17,7 +17,7 @@ export interface IRole {
   description: string | null
   receiveAdminEmails: boolean | null
   deleted: boolean | null
-  permissions: JsonValue | null
+  permissions: Prisma.JsonValue | null
   settingsAccess: boolean | null
   allCustomersAccess: boolean | null
 }
