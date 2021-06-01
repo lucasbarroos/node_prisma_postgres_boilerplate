@@ -9,6 +9,7 @@ export interface ICompanyCreate {
   phone?: string | null
   address?: string | null
   number?: string | null
+  metadata?: Prisma.JsonValue | null
 }
 export interface ICompany {
   id: number
@@ -20,6 +21,7 @@ export interface ICompany {
   phone?: string | null
   address?: string | null
   number?: string | null
+  metadata?: Prisma.JsonValue | null
 }
 export interface IResponseType {
   total: number

@@ -1,21 +1,27 @@
-import { createCompany, getCompanys, getCompanyById, updateCompany } from './core';
+import { createCompany, getCompanys, queryOne, getCompanyById, updateCompany } from './core';
 import { ICompany } from './interface';
 
 export const store = async (request: { body: ICompany }, response: any) => {
-  const { active, name, cnpj } = request.body;
+  const { active, name, cnpj, document, email, phone, address, number, metadata } = request.body;
   if (!name || !cnpj) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
   }
-  const user = await createCompany({ active, name, cnpj });
-  return response.send(user);
+
+  const companyRepeated = await queryOne({ name, cnpj });
+  if (companyRepeated) {
+    return response.status(400).send({ message: 'A company with this name or cnpj exists.' })
+  }
+
+  const company = await createCompany({ active, name, cnpj, document, email, phone, address, number, metadata });
+  return response.send(company);
 };
 
 export const update = async (request: { params: { id: number }, body: ICompany }, response: any) => {
-  const { id, active, name, cnpj } = request.body;
+  const { id, active, name, cnpj, document, email, phone, address, number, metadata } = request.body;
   if (!name || !cnpj) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
   }
-  const company = await updateCompany(request.params.id, { id, active, name, cnpj });
+  const company = await updateCompany(request.params.id, { id, active, name, cnpj, document, email, phone, address, number, metadata });
   return response.send(company);
 };
 

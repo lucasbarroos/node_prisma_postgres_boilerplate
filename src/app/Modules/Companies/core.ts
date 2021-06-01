@@ -1,6 +1,5 @@
 import database from '../../../database';
 import { ICompany, ICompanyCreate, IResponseType } from './interface';
-import { Company } from '@prisma/client'
 
 export const createCompany = async (data: ICompanyCreate): Promise<ICompany | null> => {
   const newCompany = await database.company.create({
@@ -24,6 +23,18 @@ export const getCompanyById = async (id: number): Promise<ICompany | null> => {
   const company = await database.company.findUnique({
     where: { id: parseInt(`${id}`) },
   });
+  return company;
+};
+
+export const queryOne = async (query: any) => {
+  const company = await database.company.findFirst({
+    where: {
+      ...query,
+    },
+  });
+
+  console.log(company);
+
   return company;
 };
 
