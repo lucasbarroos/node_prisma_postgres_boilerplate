@@ -2,20 +2,20 @@ import { createCompany, getCompanys, getCompanyById, updateCompany } from './cor
 import { ICompany } from './interface';
 
 export const store = async (request: { body: ICompany }, response: any) => {
-  const { active, name, description, permissions, deleted, receiveAdminEmails, allCustomersAccess, settingsAccess } = request.body;
-  if (!name) {
+  const { active, name, cnpj } = request.body;
+  if (!name || !cnpj) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
   }
-  const user = await createCompany({ active, name, description, permissions, deleted, receiveAdminEmails, allCustomersAccess, settingsAccess });
+  const user = await createCompany({ active, name, cnpj });
   return response.send(user);
 };
 
 export const update = async (request: { params: { id: number }, body: ICompany }, response: any) => {
-  const { id, active, name, description, permissions, receiveAdminEmails, deleted, allCustomersAccess, settingsAccess } = request.body;
-  if (!name) {
+  const { id, active, name, cnpj } = request.body;
+  if (!name || !cnpj) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
   }
-  const company = await updateCompany(request.params.id, { id, active, name, description, receiveAdminEmails, permissions, deleted, allCustomersAccess, settingsAccess });
+  const company = await updateCompany(request.params.id, { id, active, name, cnpj });
   return response.send(company);
 };
 

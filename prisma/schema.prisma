@@ -43,7 +43,7 @@ model Company {
   active   Boolean @default(true)
   id       Int     @id @default(autoincrement())
   name     String  @unique
-  cpnj     String  @unique
+  cnpj     String  @unique
   document String?
   email    String?
   phone    String?

@@ -19,7 +19,7 @@ export const updateUser = async (id: number, data: IUserUpdate): Promise<IUser |
   return user;
 };
 
-export const getUserById = async (id: number): Promise<IUser |  null> => {
+export const getUserById = async (id: number): Promise<IUser | null> => {
   const user = await database.user.findUnique({
     where: { id: parseInt(`${id}`) },
     include: {
@@ -30,7 +30,7 @@ export const getUserById = async (id: number): Promise<IUser |  null> => {
 };
 
 
-export const getUserByEmail = async (email: string): Promise<IUser |  null> => {
+export const getUserByEmail = async (email: string): Promise<IUser | null> => {
   const user = await database.user.findUnique({
     where: { email: email.toLocaleLowerCase() },
   });
@@ -43,7 +43,7 @@ export const getUsers = async (page?: number, limit?: number, listAll?: boolean,
   const numberToSkip = (pageSelected - 1) * limitSelected;
 
   const listAllSanitized = listAll && JSON.parse(`${listAll}`) === true; // The listAll is comming as a string :(
-  
+
   if (listAllSanitized) {
     const users = await database.user.findMany({
       skip: numberToSkip,
@@ -60,7 +60,7 @@ export const getUsers = async (page?: number, limit?: number, listAll?: boolean,
         name: 'asc',
       },
     });
-    
+
     return users;
   }
 
@@ -71,7 +71,7 @@ export const getUsers = async (page?: number, limit?: number, listAll?: boolean,
       },
     },
   });
-  
+
   const users = await database.user.findMany({
     skip: numberToSkip,
     take: parseInt(`${limit}`) || 10,
@@ -93,6 +93,6 @@ export const getUsers = async (page?: number, limit?: number, listAll?: boolean,
     page: pageSelected,
     limit: limitSelected,
     total: usersTotal,
-    pages: Math.ceil(usersTotal/usersTotal),
+    pages: Math.ceil(usersTotal / usersTotal),
   };
 };

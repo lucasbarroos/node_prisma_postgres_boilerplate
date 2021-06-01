@@ -2,26 +2,24 @@ import { Prisma } from '@prisma/client';
 
 export interface ICompanyCreate {
   active: boolean
-  id: number
   name: string
-  cpnj: string
-  document: string | null
-  email: string | null
-  phone: string | null
-  address: string | null
-  number: string | null
-  metadata: Prisma.JsonValue | null
+  cnpj: string
+  document?: string | null
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  number?: string | null
 }
 export interface ICompany {
   id: number
   active: boolean
-  cpnj: string
-  document: string | null
-  email: string | null
-  phone: string | null
-  address: string | null
-  number: string | null
-  metadata: Prisma.JsonValue | null
+  name: string
+  cnpj: string
+  document?: string | null
+  email?: string | null
+  phone?: string | null
+  address?: string | null
+  number?: string | null
 }
 export interface IResponseType {
   total: number
