@@ -33,8 +33,6 @@ export const queryOne = async (query: any) => {
     },
   });
 
-  console.log(company);
-
   return company;
 };
 
