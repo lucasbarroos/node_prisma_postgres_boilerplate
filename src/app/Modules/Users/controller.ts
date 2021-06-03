@@ -2,7 +2,7 @@ import { createUser, getUsers, getUserById, updateUser } from './core';
 import { cryptPassword } from '../Authentication/core';
 import { IUserCreate, IUser } from './interface';
 
-export const store = async (request: { body: IUser }, response: any) => {
+export const store = async (request: { body: IUserCreate }, response: any) => {
   const { active, email, name, phone, roleId, password, companies } = request.body;
   if (!name) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });

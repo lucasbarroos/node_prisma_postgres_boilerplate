@@ -51,8 +51,14 @@ export const updateUser = async (id: number, data: any, companies?: number[] | I
 export const getUserById = async (id: number): Promise<IUser | null> => {
   const user = await database.user.findUnique({
     where: { id: parseInt(`${id}`) },
-    include: {
+    select: {
+      id: true,
+      active: true,
+      name: true,
+      email: true,
+      phone: true,
       role: true,
+      companies: true,
     },
   });
   return user;
@@ -82,7 +88,12 @@ export const getUsers = async (page?: number, limit?: number, listAll?: boolean,
           contains: query,
         },
       },
-      include: {
+      select: {
+        id: true,
+        active: true,
+        name: true,
+        email: true,
+        phone: true,
         role: true,
         companies: true,
       },
@@ -110,7 +121,12 @@ export const getUsers = async (page?: number, limit?: number, listAll?: boolean,
         contains: query,
       },
     },
-    include: {
+    select: {
+      id: true,
+      active: true,
+      name: true,
+      email: true,
+      phone: true,
       role: true,
       companies: true,
     },

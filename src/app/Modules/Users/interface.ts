@@ -7,6 +7,7 @@ export interface IUserCreate {
   phone?: string | null
   role?: number
   roleId?: number | null
+  companies?: number[] | ICompany[]
 }
 export interface IUserUpdate {
   active?: boolean
@@ -22,7 +23,7 @@ export interface IUser {
   id?: number
   email: string
   name: string
-  password: string
+  password?: string
   phone?: string | null
   roleId?: number | null
   companies?: number[] | ICompany[]
