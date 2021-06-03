@@ -1,6 +1,15 @@
 import database from '../../../database';
-import { IUser, IUserCreate, IUserUpdate, IResponseType } from './interface';
+import { IUser, IResponseType } from './interface';
 import { ICompany } from '../Companies/interface';
+
+const relationHelper = (data: any[] = []) => ({
+  set: data.map((item) => {
+    if (Number.isInteger(item)) {
+      return { id: item };
+    }
+    return { id: item.id };
+  })
+});
 
 export const createUser = async (data: any, companies?: number[] | ICompany[]): Promise<IUser | null> => {
   const newUser = await database.user.create({
@@ -8,20 +17,18 @@ export const createUser = async (data: any, companies?: number[] | ICompany[]): 
   });
 
   const userRelationed = await database.user.update({
-    where: { 
+    where: {
       id: newUser.id,
     },
-    data: { 
+    data: {
       companies: { set: [{ id: 1 }] },
     },
   });
 
-  console.log(userRelationed);
-
   return userRelationed;
 };
 
-export const updateUser = async (id: number, data: any): Promise<IUser | null> => {
+export const updateUser = async (id: number, data: any, companies?: number[] | ICompany[]): Promise<IUser | null> => {
   const user = await database.user.update({
     where: {
       id: parseInt(`${id}`),
@@ -29,7 +36,16 @@ export const updateUser = async (id: number, data: any): Promise<IUser | null> =
     data,
   });
 
-  return user;
+  const userRelationed = await database.user.update({
+    where: {
+      id: user.id,
+    },
+    data: {
+      companies: relationHelper(companies),
+    },
+  });
+
+  return userRelationed;
 };
 
 export const getUserById = async (id: number): Promise<IUser | null> => {
@@ -68,6 +84,7 @@ export const getUsers = async (page?: number, limit?: number, listAll?: boolean,
       },
       include: {
         role: true,
+        companies: true,
       },
       orderBy: {
         name: 'asc',
@@ -95,6 +112,7 @@ export const getUsers = async (page?: number, limit?: number, listAll?: boolean,
     },
     include: {
       role: true,
+      companies: true,
     },
     orderBy: {
       name: 'asc',
