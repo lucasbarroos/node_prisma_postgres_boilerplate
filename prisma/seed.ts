@@ -201,6 +201,21 @@ export const main = async () => {
       roleId: adminRole.id,
     },
   });
+
+  await database.company.upsert({
+    where: { cnpj: '123' },
+    update: {},
+    create: {
+      active: true,
+      name: 'Company test',
+      cnpj: '123',
+      document: '321',
+      email: 'comany@gmail.com',
+      phone: '(21) 98120-9129',
+      address: 'Address',
+      number: '10A',
+    },
+  });
 };
 
 main().then(() => {

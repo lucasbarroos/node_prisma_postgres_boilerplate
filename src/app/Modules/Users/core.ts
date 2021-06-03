@@ -2,14 +2,26 @@ import database from '../../../database';
 import { IUser, IUserCreate, IUserUpdate, IResponseType } from './interface';
 import { ICompany } from '../Companies/interface';
 
-export const createUser = async (data: IUserCreate, companies?: number[] | ICompany[]): Promise<IUser | null> => {
+export const createUser = async (data: any, companies?: number[] | ICompany[]): Promise<IUser | null> => {
   const newUser = await database.user.create({
     data,
   });
-  return newUser;
+
+  const userRelationed = await database.user.update({
+    where: { 
+      id: newUser.id,
+    },
+    data: { 
+      companies: { set: [{ id: 1 }] },
+    },
+  });
+
+  console.log(userRelationed);
+
+  return userRelationed;
 };
 
-export const updateUser = async (id: number, data: IUserUpdate): Promise<IUser | null> => {
+export const updateUser = async (id: number, data: any): Promise<IUser | null> => {
   const user = await database.user.update({
     where: {
       id: parseInt(`${id}`),

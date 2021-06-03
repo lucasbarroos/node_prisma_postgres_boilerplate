@@ -5,6 +5,7 @@ export interface IUserCreate {
   name: string
   password: string
   phone?: string | null
+  role?: number
   roleId?: number | null
 }
 export interface IUserUpdate {

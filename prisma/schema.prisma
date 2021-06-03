@@ -34,16 +34,16 @@ model User {
   name      String
   phone     String?
   password  String
-  role      Role?     @relation(fields: [roleId], references: [id])
-  roleId    Int?
+  role      Role      @relation(fields: [roleId], references: [id])
+  roleId    Int
   companies Company[]
 }
 
 model Company {
   active   Boolean @default(true)
   id       Int     @id @default(autoincrement())
-  name     String  @unique
   cnpj     String  @unique
+  name     String
   document String?
   email    String?
   phone    String?
