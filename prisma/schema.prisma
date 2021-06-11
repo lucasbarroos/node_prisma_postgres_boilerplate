@@ -34,8 +34,8 @@ model User {
   name      String
   phone     String?
   password  String
-  role      Role      @relation(fields: [roleId], references: [id])
-  roleId    Int
+  roles     Role      @relation(fields: [rolesId], references: [id])
+  rolesId   Int
   companies Company[]
 }
 

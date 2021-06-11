@@ -18,6 +18,15 @@ export const validateAccess = async (user: { email: string, password: string }):
   const { email, password } = user;
   const access = await database.user.findUnique({
     where: { email: email.toLocaleLowerCase() },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      phone: true,
+      rolesId: true,
+      roles: true,
+      password: true,
+    },
   });
 
   if (!access) {
@@ -28,8 +37,9 @@ export const validateAccess = async (user: { email: string, password: string }):
     return false;
   }
 
-  return { 
-    access,
+  return {
+    ...access,
+    password: null,
     token: generateToken({ id: access.id }),
   };
 };

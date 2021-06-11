@@ -3,29 +3,29 @@ import { cryptPassword } from '../Authentication/core';
 import { IUserCreate, IUser } from './interface';
 
 export const store = async (request: { body: IUserCreate }, response: any) => {
-  const { active, email, name, phone, roleId, password, companies } = request.body;
+  const { active, email, name, phone, rolesId, password, companies } = request.body;
   if (!name) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
   }
-  const user = await createUser({ active, email: email.toLocaleLowerCase(), name, phone, roleId, password: await cryptPassword(password) }, companies);
+  const user = await createUser({ active, email: email.toLocaleLowerCase(), name, phone, rolesId, password: await cryptPassword(password) }, companies);
   return response.send(user);
 };
 
 export const update = async (request: { params: { id: number }, body: IUser }, response: any) => {
-  const { active, email, name, phone, roleId, companies } = request.body;
+  const { active, email, name, phone, rolesId, companies } = request.body;
   if (!name) {
     return response.status(400).send({ message: 'Invalid input data. Please, verify and try again.' });
   }
-  const role = await updateUser(request.params.id, { active, email: email.toLocaleLowerCase(), name, phone, roleId }, companies);
-  return response.send(role);
+  const user = await updateUser(request.params.id, { active, email: email.toLocaleLowerCase(), name, phone, rolesId }, companies);
+  return response.send(user);
 };
 
 export const index = async (request: { params: { id: number } }, response: any) => {
-  const role = await getUserById(request.params.id);
-  if (!role) {
+  const user = await getUserById(request.params.id);
+  if (!user) {
     return response.status(404).send({ message: 'User not found' });
   }
-  return response.send(role);
+  return response.send(user);
 };
 
 export const show = async (request: any, response: any) => {

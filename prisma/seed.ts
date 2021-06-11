@@ -198,7 +198,7 @@ export const main = async () => {
       email: 'admin@admin.com.br',
       password: await cryptPassword('123'), // Encrypt the user password
       phone: '(81) 91929-9129',
-      roleId: adminRole.id,
+      rolesId: adminRole.id,
     },
   });
 

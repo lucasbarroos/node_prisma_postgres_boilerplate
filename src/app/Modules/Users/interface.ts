@@ -5,8 +5,8 @@ export interface IUserCreate {
   name: string
   password: string
   phone?: string | null
-  role?: number
-  roleId?: number | null
+  roles?: number
+  rolesId?: number | null
   companies?: number[] | ICompany[]
 }
 export interface IUserUpdate {
@@ -15,7 +15,7 @@ export interface IUserUpdate {
   email: string
   name: string
   phone?: string | null
-  roleId?: number | null
+  rolesId?: number | null
 }
 
 export interface IUser {
@@ -25,7 +25,7 @@ export interface IUser {
   name: string
   password?: string
   phone?: string | null
-  roleId?: number | null
+  rolesId?: number | null
   companies?: number[] | ICompany[]
 }
 export interface IResponseType {
