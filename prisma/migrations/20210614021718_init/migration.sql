@@ -31,7 +31,7 @@ CREATE TABLE "User" (
     "name" TEXT NOT NULL,
     "phone" TEXT,
     "password" TEXT NOT NULL,
-    "roleId" INTEGER NOT NULL,
+    "rolesId" INTEGER NOT NULL,
 
     PRIMARY KEY ("id")
 );
@@ -80,7 +80,7 @@ CREATE UNIQUE INDEX "_CompanyToUser_AB_unique" ON "_CompanyToUser"("A", "B");
 CREATE INDEX "_CompanyToUser_B_index" ON "_CompanyToUser"("B");
 
 -- AddForeignKey
-ALTER TABLE "User" ADD FOREIGN KEY ("roleId") REFERENCES "Role"("id") ON DELETE CASCADE ON UPDATE CASCADE;
+ALTER TABLE "User" ADD FOREIGN KEY ("rolesId") REFERENCES "Role"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_CompanyToUser" ADD FOREIGN KEY ("A") REFERENCES "Company"("id") ON DELETE CASCADE ON UPDATE CASCADE;
